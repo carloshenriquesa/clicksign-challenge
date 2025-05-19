@@ -1,9 +1,11 @@
 <script setup lang="ts">
-import TheWelcome from '../components/TheWelcome.vue'
+import DashboardBlankslate from '@/components/DashboardBlankslate.vue'
+import ProjectList from '@/components/ProjectList.vue'
 </script>
 
 <template>
-  <main>
-    <TheWelcome />
-  </main>
+  <div class="dashboard">
+    <DashboardBlankslate />
+    <ProjectList />
+  </div>
 </template>
