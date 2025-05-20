@@ -2,19 +2,19 @@
   <div class="project-card">
     <div class="project-card-header">
       <img class="project-card-image" :src="Blankslate" alt="Imagem do projeto" />
-      <ProjectActions class="actions" />
+      <ProjectActions class="actions" :project="props.project" />
     </div>
     <div class="project-card-content">
-      <h2 class="project-card-title">Projeto 1</h2>
-      <p class="project-card-description"><strong>Cliente:</strong> Clicksign</p>
+      <h2 class="project-card-title">{{ props.project.name }}</h2>
+      <p class="project-card-description"><strong>Cliente:</strong>{{ props.project.client }}</p>
       <hr />
       <p class="project-card-description">
         <IconCalendarDay />
-        01 de setembro de 2024
+        {{ props.project.startDate }}
       </p>
       <p class="project-card-description">
         <IconCalendarCheck />
-        01 de setembro de 2024
+        {{ props.project.endDate }}
       </p>
     </div>
   </div>
@@ -25,6 +25,15 @@ import IconCalendarCheck from './icons/IconCalendarCheck.vue'
 import IconCalendarDay from './icons/IconCalendarDay.vue'
 import Blankslate from '@/assets/images/blankslate.png'
 import ProjectActions from './ProjectActions.vue'
+import { defineProps } from 'vue'
+import type { Project } from '@/schema/project-schema'
+
+const props = defineProps({
+  project: {
+    type: Object as () => Project,
+    required: true,
+  },
+})
 </script>
 
 <style lang="scss" scoped>

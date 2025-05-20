@@ -19,27 +19,26 @@ import { ref, watch } from 'vue'
 import IconFavorite from '../icons/IconFavorite.vue'
 
 interface Props {
-  initialValue?: boolean
+  isActive?: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  initialValue: false,
+  isActive: false,
 })
 
-const isActive = ref<boolean>(props.initialValue)
+const isActive = ref<boolean>(props.isActive)
 
-// Define o evento que será emitido
 const emit = defineEmits<{
-  (e: 'update:isActive', value: boolean): void
+  (e: 'update', value: boolean): void
 }>()
 
 const toggle = (): void => {
   isActive.value = !isActive.value
-  emit('update:isActive', isActive.value)
+  emit('update', isActive.value)
 }
 
 watch(
-  () => props.initialValue,
+  () => props.isActive,
   (newValue) => {
     isActive.value = newValue
   },

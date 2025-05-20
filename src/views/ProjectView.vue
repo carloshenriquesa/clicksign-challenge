@@ -1,13 +1,3 @@
-<script setup lang="ts">
-import { ref } from 'vue'
-import IconArrowLeft from '@/components/icons/IconArrowLeft.vue'
-import UiForm from '@/components/ui/UiForm.vue'
-import UiButton from '@/components/ui/UiButton.vue'
-import UiInput from '@/components/ui/UiInput.vue'
-
-const name = ref('')
-</script>
-
 <template>
   <section class="project">
     <header>
@@ -19,17 +9,27 @@ const name = ref('')
       <h1 class="project-title">Novo Projeto</h1>
     </header>
     <div class="project-content">
-      <UiForm @submit="() => console.log('Form submitted!')">
+      <UiForm @submit="() => submitProject()">
         <template #fields>
           <div class="grid">
-            <UiInput :required="true" v-model="name" label="Nome do projeto" />
+            <UiInput :required="true" v-model="projectForm.name" label="Nome do projeto" />
           </div>
           <div class="grid">
-            <UiInput :required="true" v-model="name" label="Cliente" />
+            <UiInput :required="true" v-model="projectForm.client" label="Cliente" />
           </div>
           <div class="grid grid-cols-2">
-            <UiInput :required="true" type="date" v-model="name" label="Data de início" />
-            <UiInput :required="true" type="date" v-model="name" label="Data final" />
+            <UiInput
+              :required="true"
+              type="date"
+              v-model="projectForm.startDate"
+              label="Data de início"
+            />
+            <UiInput
+              :required="true"
+              type="date"
+              v-model="projectForm.endDate"
+              label="Data final"
+            />
           </div>
         </template>
         <template #footer>
@@ -39,6 +39,46 @@ const name = ref('')
     </div>
   </section>
 </template>
+
+<script setup lang="ts">
+import { ref, type Ref } from 'vue'
+import IconArrowLeft from '@/components/icons/IconArrowLeft.vue'
+import UiForm from '@/components/ui/UiForm.vue'
+import UiButton from '@/components/ui/UiButton.vue'
+import UiInput from '@/components/ui/UiInput.vue'
+import type { Project } from '@/schema/project-schema'
+import { useProjectStore } from '@/stores/project'
+import { useRoute } from 'vue-router'
+
+const projectId = useRoute().params.id as string
+const projectStore = useProjectStore()
+
+const projectForm: Ref<Project> = ref({
+  id: '',
+  name: '',
+  client: '',
+  startDate: new Date(),
+  endDate: new Date(),
+  banner: '',
+  isFavorite: false,
+})
+
+if (projectId) {
+  const project = projectStore.getProjectById(projectId)
+  if (project) {
+    projectForm.value = { ...project }
+  }
+}
+
+function submitProject() {
+  if (projectId) {
+    projectStore.updateProject(projectForm.value)
+    return
+  }
+  projectForm.value.id = crypto.randomUUID()
+  projectStore.addProject(projectForm.value)
+}
+</script>
 
 <style scoped lang="scss">
 .project {

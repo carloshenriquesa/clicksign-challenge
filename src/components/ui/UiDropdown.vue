@@ -28,7 +28,7 @@ const open = ref(false)
 
 const emit = defineEmits<{
   (e: 'edit'): void
-  (e: 'remove'): void
+  (e: 'delete'): void
 }>()
 
 function toggle(): void {
@@ -43,7 +43,7 @@ function onEdit(): void {
 }
 function onRemove(): void {
   close()
-  emit('remove')
+  emit('delete')
 }
 </script>
 

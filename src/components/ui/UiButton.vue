@@ -5,9 +5,11 @@
     @click="handleClick"
     :type="type"
   >
-    <span class="button-icon">
-      <slot name="icon"></slot>
-    </span>
+    <template v-if="$slots.icon">
+      <span class="button-icon">
+        <slot name="icon"></slot>
+      </span>
+    </template>
     {{ label }}
     <span v-if="loading" class="button-loader"></span>
     <slot v-else></slot>
@@ -19,7 +21,7 @@ import { defineProps, defineEmits } from 'vue'
 
 interface Props {
   type?: 'button' | 'submit' | 'reset'
-  variant?: 'primary' | 'outline'
+  variant?: 'primary' | 'outline' | 'secondary'
   loading?: boolean
   disabled?: boolean
   label?: string
@@ -85,6 +87,14 @@ const handleClick = (event: Event) =>
     padding: 0;
     .button-icon {
       margin-right: 5px;
+    }
+  }
+  &-secondary {
+    background-color: var(--color-white);
+    color: var(--color-primary);
+    border: 1px solid var(--color-primary);
+    &:hover {
+      background-color: var(--color-gray-light);
     }
   }
 }

@@ -3,73 +3,35 @@
     <label class="input-label"
       >{{ label }} <span class="input-label__required" v-if="required">(Obrigatório)</span></label
     >
-    <template v-if="mask">
-      <input
-        :type="type"
-        :value="modelValue"
-        @input="handleUiInput"
-        :placeholder="placeholder"
-        :class="['input', { 'input-error': error }]"
-        v-mask="mask"
-        :disabled="disabled"
-      />
-    </template>
-    <template v-else>
-      <input
-        :type="type"
-        :value="modelValue"
-        @input="handleUiInput"
-        :placeholder="placeholder"
-        :class="['input', { 'input-error': error }]"
-        :disabled="disabled"
-      />
-    </template>
+    <input
+      :type="type"
+      :value="modelValue"
+      @input="handleUiInput"
+      :class="['input', { 'input-error': error }]"
+      :disabled="disabled"
+    />
     <span v-if="error" class="input-error__message">{{ error }}</span>
   </div>
 </template>
 
+<script lang="ts">
+export interface Props {
+  modelValue: string | Date
+  type?: string
+  label?: string
+  error?: string | null
+  disabled?: boolean
+  required?: boolean
+}
+</script>
 <script setup lang="ts">
-defineProps({
-  modelValue: {
-    type: String,
-    required: true,
-  },
-  type: {
-    type: String,
-    default: 'text',
-  },
-  placeholder: {
-    type: String,
-    default: '',
-  },
-  label: {
-    type: String,
-    default: '',
-  },
-  mask: {
-    type: String,
-    default: null,
-  },
-  error: {
-    type: String,
-    default: null,
-  },
-  disabled: {
-    type: Boolean,
-    default: false,
-  },
-  required: {
-    type: Boolean,
-    default: false,
-  },
-})
+defineProps<Props>()
 
 const emit = defineEmits(['update:modelValue'])
 
 const handleUiInput = (event: Event) => {
   const target = event.target as HTMLInputElement
   const value: string = target.value
-
   emit('update:modelValue', value)
 }
 </script>

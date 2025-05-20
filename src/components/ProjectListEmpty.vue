@@ -1,3 +1,15 @@
+<template>
+  <div class="project-list-empty">
+    <h1>Nenhum projeto</h1>
+    <p>Clique no botão abaixo para criar o primeiro e gerenciá-lo.</p>
+    <UiButton @click="createProject" size="large" label="Novo projeto">
+      <template #icon>
+        <IconPlusCircle />
+      </template>
+    </UiButton>
+  </div>
+</template>
+
 <script setup lang="ts">
 import IconPlusCircle from '@/components/icons/IconPlusCircle.vue'
 import UiButton from '@/components/ui/UiButton.vue'
@@ -10,20 +22,8 @@ function createProject() {
 }
 </script>
 
-<template>
-  <div class="dashboard-blankslate">
-    <h1>Nenhum projeto</h1>
-    <p>Clique no botão abaixo para criar o primeiro e gerenciá-lo.</p>
-    <UiButton @click="createProject" size="large" label="Novo projeto">
-      <template #icon>
-        <IconPlusCircle />
-      </template>
-    </UiButton>
-  </div>
-</template>
-
 <style scoped lang="scss">
-.dashboard-blankslate {
+.project-list-empty {
   display: flex;
   flex-direction: column;
   align-items: center;
