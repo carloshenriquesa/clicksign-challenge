@@ -11,8 +11,8 @@
 import ProjectCard from '@/components/ProjectCard.vue'
 import ProjectHeader from './ProjectHeader.vue'
 import { useProjectStore } from '@/stores/project'
-import type { Project } from '@/schema/project-schema'
+import { computed } from 'vue'
 
 const projectStore = useProjectStore()
-const projectList: Project[] = projectStore.projectList
+const projectList = computed(() => projectStore.filteredProjectList)
 </script>

@@ -4,7 +4,7 @@
       Projetos<span class="project-list-counter">({{ projectListCounter }})</span>
     </h3>
     <div class="project-list-filters">
-      <UiToggle label="Apenas favoritos" />
+      <UiToggle label="Apenas favoritos" v-model="onlyFavorites" />
       <UiSelect v-model="selectedProject" :options="selectOptions" label="Projetos" />
       <UiButton label="Novo projeto" @click="handleCreateProject()">
         <template #icon><IconPlusCircle /></template>
@@ -18,7 +18,7 @@ import UiToggle from './ui/UiToggle.vue'
 import UiButton from './ui/UiButton.vue'
 import IconPlusCircle from './icons/IconPlusCircle.vue'
 import UiSelect from './ui/UiSelect.vue'
-import { computed, ref } from 'vue'
+import { computed, onMounted, ref, watch } from 'vue'
 import { useProjectStore } from '@/stores/project'
 import { useRouter } from 'vue-router'
 
@@ -31,6 +31,27 @@ const selectOptions = [
   { value: '2', label: 'Iniciados mais recentes' },
   { value: '3', label: 'Prazo mais próximo' },
 ]
+const onlyFavorites = ref(false)
+
+onMounted(() => {
+  projectStore.resetFilter()
+  projectStore.sortByAlphabeticalOrder()
+})
+
+watch([selectedProject, onlyFavorites], () => {
+  if (selectedProject.value === '1') {
+    projectStore.sortByAlphabeticalOrder()
+  } else if (selectedProject.value === '2') {
+    projectStore.sortByStartDate()
+  } else if (selectedProject.value === '3') {
+    projectStore.sortByEndDate()
+  }
+  if (onlyFavorites.value) {
+    projectStore.filterByFavorites()
+  } else {
+    projectStore.resetFilter()
+  }
+})
 
 function handleCreateProject() {
   router.push({ name: 'ProjectNew' })
