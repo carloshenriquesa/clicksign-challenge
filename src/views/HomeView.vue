@@ -6,8 +6,8 @@
 </template>
 
 <script setup lang="ts">
-import ProjectListEmpty from '@/components/ProjectListEmpty.vue'
-import ProjectList from '@/components/ProjectList.vue'
+import ProjectListEmpty from '@/components/project/ProjectListEmpty.vue'
+import ProjectList from '@/components/project/ProjectList.vue'
 import type { Project } from '@/schema/project-schema'
 import { useProjectStore } from '@/stores/project'
 

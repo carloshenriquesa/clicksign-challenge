@@ -6,7 +6,8 @@
           <IconArrowLeft />
         </template>
       </UiButton>
-      <h1 class="project-title">Novo Projeto</h1>
+      <h1 v-if="projectId" class="project-title">Editar Projeto</h1>
+      <h1 v-else class="project-title">Novo Projeto</h1>
     </header>
     <div class="project-content">
       <UiForm @submit="() => submitProject()">
@@ -31,6 +32,7 @@
               label="Data final"
             />
           </div>
+          <UiUpload v-model="projectForm.banner" />
         </template>
         <template #footer>
           <UiButton type="submit" label="Salvar projeto" class="w-full"></UiButton>
@@ -46,6 +48,7 @@ import IconArrowLeft from '@/components/icons/IconArrowLeft.vue'
 import UiForm from '@/components/ui/UiForm.vue'
 import UiButton from '@/components/ui/UiButton.vue'
 import UiInput from '@/components/ui/UiInput.vue'
+import UiUpload from '@/components/ui/UiUpload.vue'
 import type { Project } from '@/schema/project-schema'
 import { useProjectStore } from '@/stores/project'
 import { useRoute } from 'vue-router'

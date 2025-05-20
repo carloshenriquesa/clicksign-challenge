@@ -20,15 +20,15 @@
 </template>
 
 <script setup lang="ts">
-import UiFavoriteToggle from './ui/UiFavoriteToggle.vue'
-import UiDropdown from './ui/UiDropdown.vue'
-import UiModal from './ui/UiModal.vue'
-import IconTrash from './icons/IconTrash.vue'
+import UiFavoriteToggle from '@/components/ui/UiFavoriteToggle.vue'
+import UiDropdown from '@/components/ui/UiDropdown.vue'
+import UiModal from '@/components/ui/UiModal.vue'
+import IconTrash from '@/components/icons/IconTrash.vue'
 import { defineProps, ref } from 'vue'
 import type { Project } from '@/schema/project-schema'
 import { useProjectStore } from '@/stores/project'
 import { useRouter } from 'vue-router'
-import UiButton from './ui/UiButton.vue'
+import UiButton from '@/components/ui/UiButton.vue'
 
 const router = useRouter()
 const projectStore = useProjectStore()

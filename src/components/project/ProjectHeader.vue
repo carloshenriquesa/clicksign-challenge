@@ -14,10 +14,10 @@
 </template>
 
 <script setup lang="ts">
-import UiToggle from './ui/UiToggle.vue'
-import UiButton from './ui/UiButton.vue'
-import IconPlusCircle from './icons/IconPlusCircle.vue'
-import UiSelect from './ui/UiSelect.vue'
+import UiToggle from '@/components/ui/UiToggle.vue'
+import UiButton from '@/components/ui/UiButton.vue'
+import IconPlusCircle from '@/components/icons/IconPlusCircle.vue'
+import UiSelect from '@/components/ui/UiSelect.vue'
 import { computed, onMounted, ref, watch } from 'vue'
 import { useProjectStore } from '@/stores/project'
 import { useRouter } from 'vue-router'

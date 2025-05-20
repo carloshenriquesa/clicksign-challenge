@@ -1,7 +1,13 @@
 <template>
   <div class="project-card">
     <div class="project-card-header">
-      <img class="project-card-image" :src="Blankslate" alt="Imagem do projeto" />
+      <img
+        v-if="props.project.banner"
+        class="project-card-image"
+        :src="props.project.banner"
+        alt="Imagem do projeto"
+      />
+      <img v-else class="project-card-image" :src="Blankslate" alt="Imagem do projeto" />
       <ProjectActions class="actions" :project="props.project" />
     </div>
     <div class="project-card-content">
@@ -21,10 +27,10 @@
 </template>
 
 <script setup lang="ts">
-import IconCalendarCheck from './icons/IconCalendarCheck.vue'
-import IconCalendarDay from './icons/IconCalendarDay.vue'
+import IconCalendarCheck from '@/components/icons/IconCalendarCheck.vue'
+import IconCalendarDay from '@/components/icons/IconCalendarDay.vue'
 import Blankslate from '@/assets/images/blankslate.png'
-import ProjectActions from './ProjectActions.vue'
+import ProjectActions from '@/components/project/ProjectActions.vue'
 import { defineProps } from 'vue'
 import type { Project } from '@/schema/project-schema'
 
@@ -45,6 +51,7 @@ const props = defineProps({
   font-size: 16px;
   &-image {
     width: 100%;
+    height: 230px;
     object-fit: cover;
   }
   &-header {

@@ -8,8 +8,8 @@
 </template>
 
 <script setup lang="ts">
-import ProjectCard from '@/components/ProjectCard.vue'
-import ProjectHeader from './ProjectHeader.vue'
+import ProjectCard from '@/components/project/ProjectCard.vue'
+import ProjectHeader from '@/components/project/ProjectHeader.vue'
 import { useProjectStore } from '@/stores/project'
 import { computed } from 'vue'
 
