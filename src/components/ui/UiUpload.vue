@@ -93,10 +93,13 @@ const removeImage = (): void => {
     min-height: 174px;
     background: transparent;
     border-radius: 8px;
-    border: 1px dashed var(--color-primary);
+    border: 1px dashed var(--color-primary-400);
     overflow: hidden;
     position: relative;
     margin-bottom: 32px;
+    &.has-image {
+      border: none;
+    }
   }
   &-area {
     height: 100%;
@@ -151,7 +154,7 @@ const removeImage = (): void => {
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  color: var(--color-primary);
+  color: var(--color-primary-400);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 

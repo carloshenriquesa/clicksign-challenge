@@ -1,6 +1,12 @@
 <template>
   <button
-    :class="['button', `button-${variant}`, `button-${size}`, { 'button-loading': loading }]"
+    :class="[
+      'button',
+      `button-${variant}`,
+      `button-${size}`,
+      { 'button-loading': loading },
+      { 'w-full': fullWidth },
+    ]"
     :disabled="disabled || loading"
     @click="handleClick"
     :type="type"
@@ -26,6 +32,7 @@ interface Props {
   disabled?: boolean
   label?: string
   size?: 'small' | 'medium' | 'large'
+  fullWidth?: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -34,6 +41,7 @@ const props = withDefaults(defineProps<Props>(), {
   loading: false,
   disabled: false,
   size: 'medium',
+  fullWidth: false,
 })
 
 const emit = defineEmits<{
@@ -57,10 +65,18 @@ const handleClick = (event: Event) =>
   cursor: pointer;
   transition: all 0.2s ease;
   &-primary {
-    background-color: var(--color-primary);
+    background-color: var(--color-primary-400);
     color: var(--color-white);
     &:hover {
-      background-color: var(--color-primary-dark);
+      background-color: var(--color-primary-700);
+    }
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      &:hover {
+        background-color: var(--color-primary-400);
+        opacity: 0.5;
+      }
     }
   }
   &-icon {
@@ -83,7 +99,7 @@ const handleClick = (event: Event) =>
   }
   &-outline {
     background-color: transparent;
-    color: var(--color-primary);
+    color: var(--color-primary-400);
     padding: 0;
     .button-icon {
       margin-right: 5px;
@@ -91,11 +107,15 @@ const handleClick = (event: Event) =>
   }
   &-secondary {
     background-color: var(--color-white);
-    color: var(--color-primary);
-    border: 1px solid var(--color-primary);
+    color: var(--color-primary-400);
+    border: 1px solid var(--color-primary-400);
     &:hover {
       background-color: var(--color-gray-light);
     }
   }
+}
+
+.w-full {
+  width: 100%;
 }
 </style>

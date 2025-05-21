@@ -105,7 +105,7 @@ onBeforeUnmount(() => {
 }
 
 .select-container.select-open .select-header {
-  border-color: var(--color-primary);
+  border-color: var(--color-primary-400);
   border-radius: 8px 8px 0 0;
 }
 
@@ -134,7 +134,7 @@ onBeforeUnmount(() => {
 .select-option {
   padding: 12px 16px;
   cursor: pointer;
-  color: var(--color-primary);
+  color: var(--color-primary-400);
   transition: background-color 0.2s ease;
 }
 
@@ -143,7 +143,7 @@ onBeforeUnmount(() => {
 }
 
 .select-option.selected {
-  color: var(--color-primary);
+  color: var(--color-primary-400);
   background-color: #eff6ff;
 }
 

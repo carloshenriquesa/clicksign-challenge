@@ -1,7 +1,7 @@
 <template>
   <div class="input-container">
-    <label class="input-label"
-      >{{ label }} <span class="input-label__required" v-if="required">(Obrigatório)</span></label
+    <label :class="['input-label', { 'input-label-error': error }]" :for="name">
+      {{ label }} <span class="input-label-required" v-if="required">(Obrigatório)</span></label
     >
     <input
       :type="type"
@@ -9,17 +9,19 @@
       @input="handleUiInput"
       :class="['input', { 'input-error': error }]"
       :disabled="disabled"
+      :name="name"
     />
-    <span v-if="error" class="input-error__message">{{ error }}</span>
+    <span v-if="error" class="input-error-message">{{ error }}</span>
   </div>
 </template>
 
 <script lang="ts">
 export interface Props {
-  modelValue: string | Date
+  modelValue: string | Date | undefined
   type?: string
   label?: string
   error?: string | null
+  name?: string
   disabled?: boolean
   required?: boolean
 }
@@ -43,8 +45,8 @@ const handleUiInput = (event: Event) => {
   border-radius: 8px;
   font-size: 16px;
   &:disabled {
-    background-color: var(--color-primary);
-    color: var(--color-primary);
+    background-color: var(--color-primary-400);
+    color: var(--color-primary-400);
   }
   &-container {
     display: flex;
@@ -53,20 +55,26 @@ const handleUiInput = (event: Event) => {
   }
   &-error {
     border-color: var(--color-danger);
-    &__message {
+    &-message {
       color: var(--color-danger);
-      font-size: 12px;
-      font-weight: bold;
+      font-size: 14px;
+      text-align: left;
     }
   }
 
   &-label {
     font-size: 18px;
     text-align: left;
-    color: var(--color-primary);
-    &__required {
+    color: var(--color-primary-400);
+    &-required {
       color: var(--color-gray);
       font-size: 14px;
+    }
+    &-error {
+      color: var(--color-danger);
+      .input-label-required {
+        color: var(--color-danger);
+      }
     }
   }
 

@@ -16,11 +16,11 @@
       <hr />
       <p class="project-card-description">
         <IconCalendarDay />
-        {{ props.project.startDate }}
+        {{ formattedStartDate }}
       </p>
       <p class="project-card-description">
         <IconCalendarCheck />
-        {{ props.project.endDate }}
+        {{ formattedEndDate }}
       </p>
     </div>
   </div>
@@ -31,8 +31,10 @@ import IconCalendarCheck from '@/components/icons/IconCalendarCheck.vue'
 import IconCalendarDay from '@/components/icons/IconCalendarDay.vue'
 import Blankslate from '@/assets/images/blankslate.png'
 import ProjectActions from '@/components/project/ProjectActions.vue'
-import { defineProps } from 'vue'
 import type { Project } from '@/schema/project-schema'
+import { defineProps } from 'vue'
+import { computed } from 'vue'
+import formatDate from '@/utils/formatDate'
 
 const props = defineProps({
   project: {
@@ -40,6 +42,9 @@ const props = defineProps({
     required: true,
   },
 })
+
+const formattedStartDate = computed(() => formatDate(props.project.startDate))
+const formattedEndDate = computed(() => formatDate(props.project.endDate))
 </script>
 
 <style lang="scss" scoped>
@@ -49,6 +54,7 @@ const props = defineProps({
   background-color: #fff;
   border-radius: 16px;
   font-size: 16px;
+  overflow: hidden;
   &-image {
     width: 100%;
     height: 230px;
@@ -68,7 +74,7 @@ const props = defineProps({
   &-title {
     font-weight: 600;
     font-size: 20px;
-    color: var(--color-primary-darker);
+    color: var(--color-primary-800);
   }
   &-description {
     display: flex;
@@ -83,7 +89,7 @@ const props = defineProps({
     }
   }
   hr {
-    border: 1px solid var(--color-primary-lighter);
+    border: 1px solid var(--color-primary-200);
     margin-top: 16px;
   }
 }

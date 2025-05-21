@@ -37,7 +37,7 @@ function createProject() {
     font-size: 1.5rem;
     font-weight: 600;
     margin-bottom: 24px;
-    color: var(--color-primary);
+    color: var(--color-primary-400);
   }
 
   p {

@@ -78,7 +78,7 @@ const props = withDefaults(defineProps<Props>(), {
   justify-content: center;
   align-items: center;
   color: white;
-  background-color: var(--color-primary);
+  background-color: var(--color-primary-400);
   height: 64px;
   width: 64px;
   border-radius: 50%;
@@ -89,7 +89,7 @@ const props = withDefaults(defineProps<Props>(), {
 .modal-title {
   font-size: 24px;
   font-weight: 600;
-  color: var(--color-primary);
+  color: var(--color-primary-400);
   margin-bottom: 16px;
   text-align: center;
 }
@@ -97,7 +97,7 @@ const props = withDefaults(defineProps<Props>(), {
 .modal-divider {
   width: 100%;
   height: 1px;
-  background-color: var(--color-primary-light);
+  background-color: var(--color-primary-100);
   margin: 8px 0 24px 0;
 }
 

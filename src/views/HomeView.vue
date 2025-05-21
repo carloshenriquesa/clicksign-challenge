@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <ProjectListEmpty v-if="projects.length === 0" />
+    <ProjectListEmpty v-if="!isLoading && projectStore.projectList.length === 0" />
     <ProjectList v-else />
   </div>
 </template>
@@ -8,10 +8,19 @@
 <script setup lang="ts">
 import ProjectListEmpty from '@/components/project/ProjectListEmpty.vue'
 import ProjectList from '@/components/project/ProjectList.vue'
-import type { Project } from '@/schema/project-schema'
 import { useProjectStore } from '@/stores/project'
+import { onMounted, ref } from 'vue'
 
 const projectStore = useProjectStore()
+const isLoading = ref(true)
 
-const projects: Project[] = projectStore.projectList
+onMounted(async () => {
+  try {
+    await projectStore.getAllProjects()
+  } catch (error) {
+    console.error('Error fetching projects:', error)
+  } finally {
+    isLoading.value = false
+  }
+})
 </script>

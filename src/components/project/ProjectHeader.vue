@@ -70,7 +70,7 @@ function handleCreateProject() {
   &-title {
     font-size: 1.5rem;
     font-weight: bold;
-    color: var(--color-primary-dark);
+    color: var(--color-primary-700);
   }
 
   &-counter {
