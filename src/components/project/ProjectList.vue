@@ -1,7 +1,7 @@
 <template>
   <ProjectHeader />
   <section>
-    <div class="grid grid-cols-5">
+    <div class="grid xl:grid-cols-5 lg:grid-cols-3">
       <ProjectCard v-for="(project, index) in projectList" :project="project" :key="index" />
     </div>
   </section>

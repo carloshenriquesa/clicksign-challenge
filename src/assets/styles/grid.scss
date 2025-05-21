@@ -2,10 +2,149 @@
   display: grid;
   gap: 20px;
   margin-bottom: 32px;
-  &-cols-2 {
-    grid-template-columns: repeat(2, 1fr);
+}
+
+$breakpoints: (
+  'sm': 640px,
+  // Small devices (celulares em landscape, 640px e acima)
+  'md': 768px,
+  // Medium devices (tablets, 768px e acima)
+  'lg': 1024px,
+  // Large devices (desktops, 1024px e acima)
+  'xl': 1280px,
+  // Extra large devices (large desktops, 1280px e acima)
+  '2xl': 1536px, // Extra extra large devices (larger desktops, 1536px e acima)
+);
+
+.inline-grid {
+  display: inline-grid;
+}
+
+// Grid Template Columns
+@for $i from 1 through 12 {
+  .grid-cols-#{$i} {
+    grid-template-columns: repeat(#{$i}, minmax(0, 1fr));
   }
-  &-cols-5 {
-    grid-template-columns: repeat(5, 1fr);
+}
+
+.grid-cols-none {
+  grid-template-columns: none;
+}
+
+// Grid Template Rows
+@for $i from 1 through 6 {
+  .grid-rows-#{$i} {
+    grid-template-rows: repeat(#{$i}, minmax(0, 1fr));
+  }
+}
+
+.grid-rows-none {
+  grid-template-rows: none;
+}
+
+// Grid Column Start / End
+.col-auto {
+  grid-column: auto;
+}
+
+@for $i from 1 through 12 {
+  .col-span-#{$i} {
+    grid-column: span #{$i} / span #{$i};
+  }
+}
+
+.col-span-full {
+  grid-column: 1 / -1;
+}
+
+@for $i from 1 through 13 {
+  .col-start-#{$i} {
+    grid-column-start: #{$i};
+  }
+}
+
+.col-start-auto {
+  grid-column-start: auto;
+}
+
+@for $i from 1 through 13 {
+  .col-end-#{$i} {
+    grid-column-end: #{$i};
+  }
+}
+
+.col-end-auto {
+  grid-column-end: auto;
+}
+
+@mixin responsive {
+  @each $breakpoint, $width in $breakpoints {
+    @media (min-width: $width) {
+      $escaped-breakpoint: if(
+        str-slice('#{$breakpoint}', 1, 1) == '2',
+        '\\32 #{str-slice('#{$breakpoint}', 2)}',
+        $breakpoint
+      );
+      @content ($escaped-breakpoint);
+    }
+  }
+}
+
+// Classes responsivas baseadas em media queries
+@include responsive using ($breakpoint) {
+  // Container Grid
+  .#{$breakpoint}\:grid {
+    display: grid;
+  }
+
+  .#{$breakpoint}\:inline-grid {
+    display: inline-grid;
+  }
+
+  // Grid Template Columns
+  @for $i from 1 through 12 {
+    .#{$breakpoint}\:grid-cols-#{$i} {
+      grid-template-columns: repeat(#{$i}, minmax(0, 1fr));
+    }
+  }
+
+  .#{$breakpoint}\:grid-cols-none {
+    grid-template-columns: none;
+  }
+
+  // Grid Template Rows
+  @for $i from 1 through 6 {
+    .#{$breakpoint}\:grid-rows-#{$i} {
+      grid-template-rows: repeat(#{$i}, minmax(0, 1fr));
+    }
+  }
+
+  .#{$breakpoint}\:grid-rows-none {
+    grid-template-rows: none;
+  }
+
+  // Grid Column Start / End
+  .#{$breakpoint}\:col-auto {
+    grid-column: auto;
+  }
+
+  @for $i from 1 through 12 {
+    .#{$breakpoint}\:col-span-#{$i} {
+      grid-column: span #{$i} / span #{$i};
+    }
+  }
+
+  .#{$breakpoint}\:col-span-full {
+    grid-column: 1 / -1;
+  }
+
+  @for $i from 1 through 13 {
+    .#{$breakpoint}\:col-start-#{$i} {
+      grid-column-start: #{$i};
+    }
+  }
+
+  .#{$breakpoint}\:col-start-auto {
+    grid-column-start: auto;
   }
 }

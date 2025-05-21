@@ -1,9 +1,9 @@
 <template>
-  <header class="project-list-header">
+  <header class="project-list-header grid lg:grid-cols-3 md:grid-cols-1">
     <h3 class="project-list-title">
       Projetos<span class="project-list-counter">({{ projectListCounter }})</span>
     </h3>
-    <div class="project-list-filters">
+    <div class="project-list-filters lg:col-span-2">
       <UiToggle label="Apenas favoritos" v-model="onlyFavorites" />
       <UiSelect v-model="selectedProject" :options="selectOptions" label="Projetos" />
       <UiButton label="Novo projeto" @click="handleCreateProject()">
@@ -61,7 +61,6 @@ function handleCreateProject() {
 <style scoped lang="scss">
 .project-list {
   &-header {
-    display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 1rem;
@@ -81,10 +80,10 @@ function handleCreateProject() {
 
   &-filters {
     display: flex;
-    width: 40%;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-end;
     flex-direction: row;
+    gap: 32px;
   }
 }
 </style>
