@@ -1,45 +1,116 @@
-# clicksign-challenge
+# Desafio Clicksign - Gerenciador de Projetos
 
-This template should help get you started developing with Vue 3 in Vite.
+Uma aplicação de gerenciamento de projetos desenvolvida como parte do desafio Clicksign.
 
-## Recommended IDE Setup
+## Funcionalidades
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+- Listar projetos
+- Criar novos projetos
+- Editar projetos existentes
+- Filtrar projetos
+- Ordenar projetos
+- Pesquisar projetos com histórico de busca
 
-## Type Support for `.vue` Imports in TS
+## Tecnologias Utilizadas
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
+### Frontend
 
-## Customize configuration
+- **Framework:** Vue.js (versão 3)
+- **Linguagem:** TypeScript
+- **Gerenciamento de Estado:** Pinia
+- **Roteamento:** Vue Router
+- **Estilização:** SCSS
+- **Validação de Schema:** Zod
+- **Ferramenta de Build:** Vite
 
-See [Vite Configuration Reference](https://vite.dev/config/).
+## Pré-requisitos
 
-## Project Setup
+- Node.js (ex: v18.x ou superior recomendado)
+- npm (v8.x ou superior) ou yarn
 
-```sh
-pnpm install
+## 🚀 Como Iniciar (Frontend)
+
+### 1. Clone o Repositório
+
+```bash
+git clone https://github.com/carloshenriquesa/clicksign-challenge.git
+cd clicksign-challenge
 ```
 
-### Compile and Hot-Reload for Development
+### 2. Instale as Dependências
 
-```sh
-pnpm dev
+Usando npm:
+
+```bash
+npm install
 ```
 
-### Type-Check, Compile and Minify for Production
+Ou usando yarn:
 
-```sh
-pnpm build
+```bash
+yarn install
 ```
 
-### Run Unit Tests with [Vitest](https://vitest.dev/)
+### 3. Configure Variáveis de Ambiente
 
-```sh
-pnpm test:unit
+Crie um arquivo `.env.local` na raiz do projeto.
+
+```env
+VITE_API_BASE_URL=http://localhost:3001
 ```
 
-### Lint with [ESLint](https://eslint.org/)
+### 4. Executando a Aplicação Frontend (Modo de Desenvolvimento)
 
-```sh
-pnpm lint
+Este comando iniciará o servidor de desenvolvimento local para a aplicação Vue.js.
+
+```bash
+npm run dev
+```
+
+A aplicação estará disponível em `http://localhost:5173`.
+
+**Opção 2: Configurando um Servidor Mock**
+
+1.  Instale o `json-server` (globalmente ou como uma dependência de desenvolvimento do projeto):
+
+    ```bash
+    npm install -g json-server
+    # ou
+    # npm install --save-dev json-server
+    ```
+
+2.  Execute o `json-server`:
+    `bash
+npm run mock-server   
+`
+    O servidor mock estará rodando em `http://localhost:3001`.
+
+## Estrutura do Projeto (Simplificada)
+
+```
+.
+├── public/
+│   └── # Arquivos estáticos
+├── src/
+│   ├── assets/
+│   │   └── # CSS global, imagens, fontes
+│   ├── components/
+│   │   ├── icons/         # Componentes de ícones SVG
+│   │   ├── project/       # Componentes específicos da funcionalidade de Projeto (Form, Header, List, etc.)
+│   │   └── ui/            # Componentes de UI reutilizáveis (Button, Input, Select, Toggle, Upload, Form)
+│   ├── composables/     # Funções composable do Vue 3 (ex: useSearchHistory)
+│   ├── router/
+│   │   └── index.ts     # Configuração do Vue Router
+│   ├── schema/
+│   │   └── project-schema.ts # Schema Zod para validação de dados de projeto
+│   ├── stores/
+│   │   └── project.ts   # Store Pinia para gerenciamento de estado dos projetos
+│   ├── views/           # Componentes de página/rota (HomeView, ProjectView, etc.)
+│   ├── App.vue          # Componente Vue raiz
+│   └── main.ts          # Ponto de entrada principal da aplicação (inicialização do Vue, Pinia, Router)
+├── .env.local           # (Opcional, não versionado) Variáveis de ambiente locais
+├── index.html           # Arquivo HTML principal
+├── package.json         # Dependências e scripts do projeto
+├── tsconfig.json        # Configuração do TypeScript
+└── vite.config.ts       # (Se usar Vite) Configuração do Vite
 ```
