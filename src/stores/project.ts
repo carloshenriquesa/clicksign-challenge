@@ -7,14 +7,27 @@ import {
   getProjectList,
   deleteProject,
 } from '@/services/productService'
+import { normalizeText } from '@/utils/normalize'
 
 export const useProjectStore = defineStore('project', {
   state: () => ({
     project: {} as Project,
     projectList: [] as Project[],
     filteredProjectList: [] as Project[],
+    showOnlyFavorites: false,
+    searchTerm: '' as string,
   }),
   actions: {
+    setOnlyFavoritesFilter(onlyFavorites: boolean) {
+      this.showOnlyFavorites = onlyFavorites
+    },
+    setSearchTerm(searchTerm: string) {
+      this.searchTerm = searchTerm
+        .toLowerCase()
+        .trim()
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+    },
     async setProjectFavorite(projectId: string, isFavorite: boolean) {
       try {
         const index = this.projectList.findIndex((p) => p.id === projectId)
@@ -99,16 +112,22 @@ export const useProjectStore = defineStore('project', {
         console.error('Error updating project:', error)
       }
     },
-    searchProjects(searchValue: string) {
-      if (!searchValue.trim()) {
-        this.filteredProjectList = this.projectList
+    searchProjects() {
+      if (!this.searchTerm && !this.showOnlyFavorites) {
+        this.resetFilter()
         return
       }
 
-      const searchTerm = searchValue.toLowerCase()
-      this.filteredProjectList = this.projectList.filter((project) =>
-        project.name.toLowerCase().includes(searchTerm),
-      )
+      if (!this.showOnlyFavorites) {
+        this.filteredProjectList = this.projectList.filter((project) =>
+          normalizeText(project.name).includes(this.searchTerm),
+        )
+        return
+      }
+
+      this.filteredProjectList = this.projectList
+        .filter((project) => normalizeText(project.name).includes(this.searchTerm))
+        .filter((project) => project.isFavorite)
     },
   },
 })

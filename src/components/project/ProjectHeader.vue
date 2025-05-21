@@ -46,11 +46,8 @@ watch([selectedProject, onlyFavorites], () => {
   } else if (selectedProject.value === '3') {
     projectStore.sortByEndDate()
   }
-  if (onlyFavorites.value) {
-    projectStore.filterByFavorites()
-  } else {
-    projectStore.resetFilter()
-  }
+  projectStore.setOnlyFavoritesFilter(onlyFavorites.value)
+  projectStore.searchProjects()
 })
 
 function handleCreateProject() {

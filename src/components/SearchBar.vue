@@ -61,6 +61,9 @@ const toggleSearch = () => {
     }, 100)
   } else {
     showHistory.value = false
+    projectStore.setSearchTerm('')
+    projectStore.searchProjects()
+    searchInput.value = ''
   }
 }
 
@@ -73,13 +76,15 @@ const handleBlur = () => {
 const handleSearch = () => {
   if (searchInput.value.trim()) {
     saveToHistory(searchInput.value)
-    projectStore.searchProjects(searchInput.value)
   }
+  projectStore.setSearchTerm(searchInput.value)
+  projectStore.searchProjects()
 }
 
 const selectHistoryItem = (term: string) => {
   searchInput.value = term
-  projectStore.searchProjects(searchInput.value)
+  projectStore.setSearchTerm(searchInput.value)
+  projectStore.searchProjects()
   showHistory.value = false
 }
 </script>
