@@ -4,13 +4,18 @@
       {{ label }} <span class="input-label-required" v-if="required">(Obrigatório)</span></label
     >
     <input
+      ref="inputRef"
       :type="type"
       :value="modelValue"
       @input="handleUiInput"
       :class="['input', { 'input-error': error }]"
       :disabled="disabled"
       :name="name"
+      :id="name"
     />
+    <span class="input-icon" @click="openDatePicker">
+      <slot name="icon" />
+    </span>
     <span v-if="error" class="input-error-message">{{ error }}</span>
   </div>
 </template>
@@ -27,6 +32,8 @@ export interface Props {
 }
 </script>
 <script setup lang="ts">
+import { ref } from 'vue'
+
 defineProps<Props>()
 
 const emit = defineEmits(['update:modelValue'])
@@ -35,6 +42,14 @@ const handleUiInput = (event: Event) => {
   const target = event.target as HTMLInputElement
   const value: string = target.value
   emit('update:modelValue', value)
+}
+
+const inputRef = ref<HTMLInputElement>()
+
+const openDatePicker = () => {
+  if (inputRef.value && !inputRef.value.disabled) {
+    inputRef.value.showPicker()
+  }
 }
 </script>
 
@@ -49,6 +64,7 @@ const handleUiInput = (event: Event) => {
     color: var(--color-primary-400);
   }
   &-container {
+    position: relative;
     display: flex;
     flex-direction: column;
     gap: 4px;
@@ -60,6 +76,12 @@ const handleUiInput = (event: Event) => {
       font-size: 14px;
       text-align: left;
     }
+  }
+  &-icon {
+    position: absolute;
+    right: 10px;
+    top: 55%;
+    cursor: pointer;
   }
 
   &-label {
@@ -84,6 +106,11 @@ const handleUiInput = (event: Event) => {
     &__label {
       margin-left: 8px;
     }
+  }
+
+  &[type='date']::-webkit-calendar-picker-indicator {
+    display: none;
+    -webkit-appearance: none;
   }
 }
 </style>

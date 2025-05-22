@@ -27,7 +27,11 @@
           v-model="projectForm.startDate"
           label="Data de início"
           :error="errorForm.startDate"
-        />
+        >
+          <template #icon>
+            <IconCalendarDay />
+          </template>
+        </UiInput>
         <UiInput
           name="endDate"
           :required="true"
@@ -35,7 +39,11 @@
           v-model="projectForm.endDate"
           label="Data final"
           :error="errorForm.endDate"
-        />
+        >
+          <template #icon>
+            <IconCalendarCheck />
+          </template>
+        </UiInput>
       </div>
       <UiUpload v-model="projectForm.banner" />
     </template>
@@ -67,6 +75,8 @@ import { useProjectStore } from '@/stores/project'
 import { ref, type Ref } from 'vue'
 import { ZodError } from 'zod'
 import { useRouter } from 'vue-router'
+import IconCalendarDay from '../icons/IconCalendarDay.vue'
+import IconCalendarCheck from '../icons/IconCalendarCheck.vue'
 
 const isLoading = ref(false)
 const projectStore = useProjectStore()
