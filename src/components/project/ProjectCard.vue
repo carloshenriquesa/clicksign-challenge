@@ -32,7 +32,6 @@ import IconCalendarDay from '@/components/icons/IconCalendarDay.vue'
 import Blankslate from '@/assets/images/blankslate.png'
 import ProjectActions from '@/components/project/ProjectActions.vue'
 import type { Project } from '@/schema/project-schema'
-import { defineProps } from 'vue'
 import { computed } from 'vue'
 import formatDate from '@/utils/formatDate'
 

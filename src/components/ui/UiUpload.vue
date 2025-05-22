@@ -37,7 +37,6 @@ import { ref, type Ref } from 'vue'
 import IconUpload from '../icons/IconUpload.vue'
 import UiButton from './UiButton.vue'
 import IconTrash from '../icons/IconTrash.vue'
-import { defineProps } from 'vue'
 
 const props = defineProps({
   modelValue: {

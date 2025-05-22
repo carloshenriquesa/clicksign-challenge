@@ -1,3 +1,5 @@
+@use 'sass:string';
+
 .grid {
   display: grid;
   gap: 20px;
@@ -81,8 +83,8 @@ $breakpoints: (
   @each $breakpoint, $width in $breakpoints {
     @media (min-width: $width) {
       $escaped-breakpoint: if(
-        str-slice('#{$breakpoint}', 1, 1) == '2',
-        '\\32 #{str-slice('#{$breakpoint}', 2)}',
+        string.slice('#{$breakpoint}', 1, 1) == '2',
+        '\\32 #{string.slice('#{$breakpoint}', 2)}',
         $breakpoint
       );
       @content ($escaped-breakpoint);

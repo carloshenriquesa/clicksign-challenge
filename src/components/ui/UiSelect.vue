@@ -37,7 +37,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onBeforeUnmount, defineProps, defineEmits } from 'vue'
+import { ref, computed, onBeforeUnmount } from 'vue'
 
 export interface SelectOption {
   value: string
