@@ -61,7 +61,7 @@ npm run dev
 
 A aplicação estará disponível em `http://localhost:5173`.
 
-**Opção 2: Configurando um Servidor Mock**
+**Configurando um Servidor Mock**
 
 1.  Instale o `json-server` (globalmente ou como uma dependência de desenvolvimento do projeto):
 
@@ -72,9 +72,10 @@ A aplicação estará disponível em `http://localhost:5173`.
     ```
 
 2.  Execute o `json-server`:
-    `bash
-npm run mock-api   
-`
+    ```bash
+    npm run mock-api   
+    ```
+
     O servidor mock estará rodando em `http://localhost:3001`.
 
 ## Estrutura do Projeto (Simplificada)
