@@ -51,14 +51,6 @@ Ou usando yarn:
 yarn install
 ```
 
-### 3. Configure Variáveis de Ambiente
-
-Crie um arquivo `.env.local` na raiz do projeto.
-
-```env
-VITE_API_BASE_URL=http://localhost:3001
-```
-
 ### 4. Executando a Aplicação Frontend (Modo de Desenvolvimento)
 
 Este comando iniciará o servidor de desenvolvimento local para a aplicação Vue.js.
@@ -81,7 +73,7 @@ A aplicação estará disponível em `http://localhost:5173`.
 
 2.  Execute o `json-server`:
     `bash
-npm run mock-server   
+npm run mock-api   
 `
     O servidor mock estará rodando em `http://localhost:3001`.
 
