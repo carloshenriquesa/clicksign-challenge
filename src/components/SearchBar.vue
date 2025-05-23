@@ -1,5 +1,5 @@
 <template>
-  <div class="search" :class="{ 'is-expanded': isSearchExpanded }">
+  <div class="search" :class="{ 'is-expanded': isSearchExpanded }" v-click-outside="closeSearch">
     <input
       v-show="isSearchExpanded"
       v-model="searchInput"
@@ -65,6 +65,14 @@ const toggleSearch = () => {
     projectStore.searchProjects()
     searchInput.value = ''
   }
+}
+
+const closeSearch = () => {
+  isSearchExpanded.value = false
+  showHistory.value = false
+  projectStore.setSearchTerm('')
+  projectStore.searchProjects()
+  searchInput.value = ''
 }
 
 const handleBlur = () => {
