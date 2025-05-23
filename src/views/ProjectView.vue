@@ -22,17 +22,19 @@ import { useProjectStore } from '@/stores/project'
 import { useRoute } from 'vue-router'
 import { onMounted, ref } from 'vue'
 import ProjectForm from '@/components/project/ProjectForm.vue'
+import type { Project } from '@/schema/project-schema'
 
 const isLoading = ref(false)
 const projectId = useRoute().params.id as string
 const projectStore = useProjectStore()
-const project = projectStore.project
+const project = ref({} as Project)
 
 onMounted(async () => {
   if (projectId) {
     try {
       isLoading.value = true
       await projectStore.getProjectById(projectId)
+      project.value = projectStore.project
     } catch (error) {
       console.error('Error fetching project:', error)
     } finally {

@@ -80,7 +80,7 @@ const openDatePicker = () => {
   &-icon {
     position: absolute;
     right: 10px;
-    top: 55%;
+    top: 40px;
     cursor: pointer;
   }
 

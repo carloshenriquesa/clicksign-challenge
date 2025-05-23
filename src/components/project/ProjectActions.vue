@@ -41,7 +41,7 @@ const props = defineProps({
 })
 
 function handleUpdateFavorite(isFavorite: boolean) {
-  projectStore.setProjectFavorite(props.project.id, isFavorite)
+  projectStore.setProjectFavorite(props.project.id!, isFavorite)
 }
 
 function handleEditProject() {
@@ -62,7 +62,9 @@ function hideModalDeleteProject() {
 }
 
 function handleDeleteProject() {
-  projectStore.deleteProject(props.project.id)
+  if (props.project.id) {
+    projectStore.deleteProject(props.project.id)
+  }
   isModalVisible.value = false
 }
 </script>
