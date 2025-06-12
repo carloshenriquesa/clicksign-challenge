@@ -2,37 +2,20 @@
   <div class="project-actions">
     <UiFavoriteToggle :isActive="props.project.isFavorite" @update="handleUpdateFavorite" />
     <UiDropdown @edit="handleEditProject" @delete="showModalDeleteProject" />
-    <UiModal
-      message="Essa ação removerá definitivamente o projeto:"
-      :project-name="props.project.name"
-      :is-visible="isModalVisible"
-      title="Remover projeto"
-    >
-      <template #icon>
-        <IconTrash />
-      </template>
-      <template #footer>
-        <UiButton label="Cancelar" variant="secondary" @click="hideModalDeleteProject" />
-        <UiButton label="Confirmar" @click="handleDeleteProject" />
-      </template>
-    </UiModal>
   </div>
 </template>
 
 <script setup lang="ts">
 import UiFavoriteToggle from '@/components/ui/UiFavoriteToggle.vue'
 import UiDropdown from '@/components/ui/UiDropdown.vue'
-import UiModal from '@/components/ui/UiModal.vue'
-import IconTrash from '@/components/icons/IconTrash.vue'
-import { ref } from 'vue'
 import type { Project } from '@/schema/project-schema'
 import { useProjectStore } from '@/stores/project'
 import { useRouter } from 'vue-router'
-import UiButton from '@/components/ui/UiButton.vue'
+import { useModal } from '@/composables/useModal'
 
 const router = useRouter()
 const projectStore = useProjectStore()
-const isModalVisible = ref(false)
+const showDeleteModal = useModal('modal-delete')
 const props = defineProps({
   project: {
     type: Object as () => Project,
@@ -54,18 +37,8 @@ function handleEditProject() {
 }
 
 function showModalDeleteProject() {
-  isModalVisible.value = true
-}
-
-function hideModalDeleteProject() {
-  isModalVisible.value = false
-}
-
-function handleDeleteProject() {
-  if (props.project.id) {
-    projectStore.deleteProject(props.project.id)
-  }
-  isModalVisible.value = false
+  showDeleteModal.open()
+  projectStore.setCurrentProject(props.project)
 }
 </script>
 

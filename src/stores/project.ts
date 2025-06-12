@@ -11,13 +11,16 @@ import { normalizeText } from '@/utils/normalize'
 
 export const useProjectStore = defineStore('project', {
   state: () => ({
-    project: {} as Project,
+    currentProject: {} as Project,
     projectList: [] as Project[],
     filteredProjectList: [] as Project[],
     showOnlyFavorites: false,
     searchTerm: '' as string,
   }),
   actions: {
+    setCurrentProject(project: Project) {
+      this.currentProject = project
+    },
     setOnlyFavoritesFilter(onlyFavorites: boolean) {
       this.showOnlyFavorites = onlyFavorites
     },
@@ -43,7 +46,7 @@ export const useProjectStore = defineStore('project', {
       try {
         await postProject(project)
         this.projectList.push({ ...project })
-        this.project = {} as Project
+        this.currentProject = {} as Project
       } catch (error) {
         console.error('Error adding project:', error)
       }
@@ -60,7 +63,7 @@ export const useProjectStore = defineStore('project', {
     async getProjectById(id: string) {
       try {
         const project = await getProjectById(id)
-        this.project = project
+        this.currentProject = project
       } catch (error) {
         console.error('Error fetching project by ID:', error)
       }
@@ -91,7 +94,7 @@ export const useProjectStore = defineStore('project', {
         if (index !== -1) {
           await deleteProject(projectId)
           this.projectList.splice(index, 1)
-          this.project = {} as Project
+          this.currentProject = {} as Project
         }
       } catch (error) {
         console.error('Error deleting project:', error)

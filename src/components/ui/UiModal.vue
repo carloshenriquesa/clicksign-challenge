@@ -1,5 +1,5 @@
 <template>
-  <dialog v-if="isVisible" class="modal-overlay">
+  <dialog role="modal" aria-modal="true" v-if="isVisible" class="modal-overlay">
     <div class="modal-container">
       <div class="modal-header">
         <div class="modal-icon">
@@ -12,8 +12,7 @@
       <div class="modal-divider"></div>
 
       <div class="modal-body">
-        <p class="modal-message">{{ props.message }}</p>
-        <h2 class="modal-project-name">{{ props.projectName }}</h2>
+        <slot name="body" />
       </div>
 
       <div class="modal-footer">
@@ -26,8 +25,6 @@
 <script setup lang="ts">
 interface Props {
   title?: string
-  message?: string
-  projectName: string
   isVisible?: boolean
 }
 

@@ -2,6 +2,9 @@
   <div class="home">
     <ProjectListEmpty v-if="!isLoading && projectStore.projectList.length === 0" />
     <ProjectList v-else />
+    <Teleport to="body">
+      <ProjectDeleteModal />
+    </Teleport>
   </div>
 </template>
 
@@ -10,6 +13,7 @@ import ProjectListEmpty from '@/components/project/ProjectListEmpty.vue'
 import ProjectList from '@/components/project/ProjectList.vue'
 import { useProjectStore } from '@/stores/project'
 import { onMounted, ref } from 'vue'
+import ProjectDeleteModal from '@/components/project/ProjectDeleteModal.vue'
 
 const projectStore = useProjectStore()
 const isLoading = ref(true)
