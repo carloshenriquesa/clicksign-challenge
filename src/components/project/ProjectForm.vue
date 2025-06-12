@@ -1,5 +1,5 @@
 <template>
-  <UiForm @submit="() => submitProject()">
+  <UiForm @submit="submitProject">
     <template #fields>
       <div class="grid">
         <UiInput
@@ -107,6 +107,7 @@ function validateProject(project: Project) {
       errorForm.value.startDate = error.errors.find((e) => e.path[0] === 'startDate')?.message || ''
       errorForm.value.endDate = error.errors.find((e) => e.path[0] === 'endDate')?.message || ''
     }
+    console.error('Validation error:', error)
     return false
   }
 }

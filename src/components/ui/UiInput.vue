@@ -22,7 +22,6 @@
 
 <script lang="ts">
 export interface Props {
-  modelValue: string | Date | undefined
   type?: string
   label?: string
   error?: string | null
@@ -35,6 +34,11 @@ export interface Props {
 import { ref } from 'vue'
 
 defineProps<Props>()
+
+const modelValue = defineModel<string | Date | undefined>({
+  type: [String, Date],
+  default: undefined,
+})
 
 const emit = defineEmits(['update:modelValue'])
 

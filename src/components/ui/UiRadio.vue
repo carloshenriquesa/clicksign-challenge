@@ -12,7 +12,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 const props = defineProps({
   modelValue: {
     type: [String, Number, Boolean],
@@ -34,11 +34,11 @@ const props = defineProps({
     type: String,
     required: true,
   },
-});
+})
 
-const emit = defineEmits(["update:modelValue"]);
+const emit = defineEmits(['update:modelValue'])
 
 const handleUiInput = () => {
-  emit("update:modelValue", props.value);
-};
+  emit('update:modelValue', props.value)
+}
 </script>

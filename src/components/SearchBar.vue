@@ -61,18 +61,13 @@ const toggleSearch = () => {
     }, 100)
   } else {
     showHistory.value = false
-    projectStore.setSearchTerm('')
     projectStore.searchProjects()
-    searchInput.value = ''
   }
 }
 
 const closeSearch = () => {
   isSearchExpanded.value = false
   showHistory.value = false
-  projectStore.setSearchTerm('')
-  projectStore.searchProjects()
-  searchInput.value = ''
 }
 
 const handleBlur = () => {

@@ -24,7 +24,7 @@ import { useRouter } from 'vue-router'
 
 const router = useRouter()
 const projectStore = useProjectStore()
-const projectListCounter = computed(() => projectStore.projectList.length)
+const projectListCounter = computed(() => projectStore.filteredProjectList.length)
 const selectedProject = ref('1')
 const selectOptions = [
   { value: '1', label: 'Ordem alfabética' },

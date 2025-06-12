@@ -1,5 +1,5 @@
 <template>
-  <div v-if="isVisible" class="modal-overlay">
+  <dialog v-if="isVisible" class="modal-overlay">
     <div class="modal-container">
       <div class="modal-header">
         <div class="modal-icon">
@@ -20,7 +20,7 @@
         <slot name="footer" />
       </div>
     </div>
-  </div>
+  </dialog>
 </template>
 
 <script setup lang="ts">

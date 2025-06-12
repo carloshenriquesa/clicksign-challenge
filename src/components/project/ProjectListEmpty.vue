@@ -18,7 +18,7 @@ import { useRouter } from 'vue-router'
 const router = useRouter()
 
 function createProject() {
-  router.push('/project/new')
+  router.push({ name: 'ProjectNew' })
 }
 </script>
 

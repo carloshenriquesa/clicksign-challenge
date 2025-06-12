@@ -25,9 +25,11 @@
 
     <div v-else class="image-preview">
       <img :src="selectedImage" alt="Preview" class="preview-image" />
-      <button class="delete-button" @click="removeImage">
-        <IconTrash />
-      </button>
+      <UiButton variant="secondary" :rounded="true" class="delete-button" @click="removeImage">
+        <template #icon>
+          <IconTrash />
+        </template>
+      </UiButton>
     </div>
   </div>
 </template>
@@ -52,6 +54,7 @@ interface FileReaderEvent extends ProgressEvent {
 const fileInput: Ref<HTMLInputElement | null> = ref(null)
 const selectedImage: Ref<string | null> = ref(null)
 selectedImage.value = props.modelValue || null
+
 const triggerFileInput = (): void => {
   if (fileInput.value) {
     fileInput.value.click()
@@ -74,11 +77,11 @@ const handleFileSelect = (event: Event): void => {
 }
 
 const removeImage = (): void => {
-  selectedImage.value = null
+  selectedImage.value = ''
   if (fileInput.value) {
     fileInput.value.value = ''
   }
-  emit('update:modelValue', null)
+  emit('update:modelValue', '')
 }
 </script>
 
@@ -144,20 +147,5 @@ const removeImage = (): void => {
   position: absolute;
   top: 16px;
   right: 16px;
-  background-color: var(--color-white);
-  border: none;
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  color: var(--color-primary-400);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.delete-button:hover {
-  background-color: var(--color-white);
 }
 </style>

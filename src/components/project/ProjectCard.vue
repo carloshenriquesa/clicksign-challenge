@@ -2,12 +2,10 @@
   <div class="project-card">
     <div class="project-card-header">
       <img
-        v-if="props.project.banner"
         class="project-card-image"
-        :src="props.project.banner"
+        :src="props.project.banner || Blankslate"
         alt="Imagem do projeto"
       />
-      <img v-else class="project-card-image" :src="Blankslate" alt="Imagem do projeto" />
       <ProjectActions class="actions" :project="props.project" />
     </div>
     <div class="project-card-content">
@@ -32,7 +30,6 @@ import IconCalendarDay from '@/components/icons/IconCalendarDay.vue'
 import Blankslate from '@/assets/images/blankslate.png'
 import ProjectActions from '@/components/project/ProjectActions.vue'
 import type { Project } from '@/schema/project-schema'
-import { computed } from 'vue'
 import formatDate from '@/utils/formatDate'
 
 const props = defineProps({
@@ -42,8 +39,8 @@ const props = defineProps({
   },
 })
 
-const formattedStartDate = computed(() => formatDate(props.project.startDate))
-const formattedEndDate = computed(() => formatDate(props.project.endDate))
+const formattedStartDate = formatDate(props.project.startDate)
+const formattedEndDate = formatDate(props.project.endDate)
 </script>
 
 <style lang="scss" scoped>

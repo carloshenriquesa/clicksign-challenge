@@ -22,11 +22,7 @@ export const useProjectStore = defineStore('project', {
       this.showOnlyFavorites = onlyFavorites
     },
     setSearchTerm(searchTerm: string) {
-      this.searchTerm = searchTerm
-        .toLowerCase()
-        .trim()
-        .normalize('NFD')
-        .replace(/[\u0300-\u036f]/g, '')
+      this.searchTerm = normalizeText(searchTerm)
     },
     async setProjectFavorite(projectId: string, isFavorite: boolean) {
       try {

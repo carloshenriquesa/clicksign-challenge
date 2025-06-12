@@ -6,6 +6,7 @@
       `button-${size}`,
       { 'button-loading': loading },
       { 'w-full': fullWidth },
+      { 'button-rounded': rounded },
     ]"
     :disabled="disabled || loading"
     @click="handleClick"
@@ -31,6 +32,7 @@ interface Props {
   label?: string
   size?: 'small' | 'medium' | 'large'
   fullWidth?: boolean
+  rounded?: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -80,16 +82,12 @@ const handleClick = (event: Event) =>
   &-icon {
     display: flex;
     align-items: center;
-    margin-right: 16px;
+    margin-right: 12px;
   }
   &-medium {
     height: 40px;
     font-size: 16px;
     padding: 0 24px;
-    .icon {
-      width: 24px;
-      height: 24px;
-    }
   }
   &-large {
     height: 52px;
@@ -103,12 +101,21 @@ const handleClick = (event: Event) =>
       margin-right: 5px;
     }
   }
+  &-rounded {
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+  }
   &-secondary {
     background-color: var(--color-white);
     color: var(--color-primary-400);
     border: 1px solid var(--color-primary-400);
     &:hover {
-      background-color: var(--color-gray-light);
+      background-color: var(--color-gray-100);
     }
   }
 }
