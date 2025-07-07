@@ -81,14 +81,9 @@ import IconCalendarCheck from '../icons/IconCalendarCheck.vue'
 const isLoading = ref(false)
 const projectStore = useProjectStore()
 const router = useRouter()
-const props = defineProps({
-  project: {
-    type: Object as () => Project,
-    required: true,
-  },
-})
 
-const projectForm: Ref<Project> = ref(props.project)
+const projectForm: Ref<Project> = ref(projectStore.currentProject)
+
 const errorForm = ref({
   name: '',
   client: '',
@@ -119,7 +114,7 @@ async function submitProject() {
 
   try {
     isLoading.value = true
-    if (props.project.id) {
+    if (projectStore.currentProject.id) {
       await projectStore.updateProject(projectForm.value)
     } else {
       projectStore.addProject(projectForm.value)
